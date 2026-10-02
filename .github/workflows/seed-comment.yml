@@ -1,0 +1,16 @@
+name: seed bot comment
+on:
+  workflow_dispatch:
+    inputs:
+      issue:
+        required: true
+permissions:
+  issues: write
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "A comment from the seed workflow, posted as the Actions bot."
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ inputs.issue }}
